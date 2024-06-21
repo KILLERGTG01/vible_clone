@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-//import 'package:vible_clone/home_screen.dart';
-
+import 'home_screen.dart';
 class AnimatedSplashScreen extends StatefulWidget {
   const AnimatedSplashScreen({super.key});
   @override
-  State<AnimatedSplashScreen> createState(){
+  State<AnimatedSplashScreen> createState() {
     return _AnimatedSplashScreenState();
   }
 }
 
-class _AnimatedSplashScreenState extends State<AnimatedSplashScreen> with TickerProviderStateMixin {
+class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
+    with TickerProviderStateMixin {
   late AnimationController _imageController;
   late AnimationController _vController;
   late Animation<double> _imageAnimation;
@@ -48,10 +48,10 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen> with Ticker
     // Simulate a network request or some async task
     await Future.delayed(const Duration(seconds: 5));
     // Navigate to the home screen
-    /*Navigator.pushReplacement(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const HomeScreen()),
-    );*/
+    );
   }
 
   @override
@@ -70,16 +70,25 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen> with Ticker
           children: [
             FadeTransition(
               opacity: _imageAnimation,
-              child: Image.asset('assets/images/splash.png',),
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/splash.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                width: double.infinity,
+                height: double.infinity,
+              ),
             ),
             ScaleTransition(
               scale: _vAnimation,
-              child:const Text(
+              child: const Text(
                 'V',
                 style: TextStyle(
-                  fontSize: 100,
+                  fontSize: 200,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 223, 170, 35),
+                  color: Color.fromARGB(255, 234, 231, 223),
                 ),
               ),
             ),
