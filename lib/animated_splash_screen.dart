@@ -70,7 +70,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen> with Ticker
           children: [
             FadeTransition(
               opacity: _imageAnimation,
-              child: Image.asset('assets/Alexander_the_Great_standing_triumphantly_on_a_bat.png'), // Your image path
+              child: Image.asset('assets/images/splash.png',),
             ),
             ScaleTransition(
               scale: _vAnimation,
@@ -79,7 +79,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen> with Ticker
                 style: TextStyle(
                   fontSize: 100,
                   fontWeight: FontWeight.bold,
-                  color: Colors.red,
+                  color: Color.fromARGB(255, 223, 170, 35),
                 ),
               ),
             ),
