@@ -88,7 +88,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
                 style: TextStyle(
                   fontSize: 200,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 234, 231, 223),
+                  color: Colors.amber,
                 ),
               ),
             ),
