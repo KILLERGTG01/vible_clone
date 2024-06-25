@@ -1,9 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:vible_clone/auth/auth_provider.dart';
-import 'pages/login_page.dart';
-import 'pages/wallet_page.dart';
-import 'pages/profile_page.dart';
+import 'login_page.dart';
+import 'wallet_page.dart';
+import 'profile_page.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget{

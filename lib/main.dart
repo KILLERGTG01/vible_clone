@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vible_clone/animated_splash_screen.dart';
+import 'package:vible_clone/pages/animated_splash_screen.dart';
 import 'package:vible_clone/auth/auth_provider.dart';
 
 void main() {
