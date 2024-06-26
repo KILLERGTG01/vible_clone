@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vible_clone/auth/auth_provider.dart';
+import 'wallet_page.dart';
+import 'profile_page.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+  final int sourceIndex;
+  LoginPage({super.key, required this.sourceIndex});
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+      
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
+    void exitscreentowalletPage(){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const WalletPage()),
+      );}
+    void exitscreentoprofilePage(){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ProfilePage()),
+      );
+    }
+    void showMessage(){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login failed. Please try again.')),
+      );
+    }
     return Scaffold(
       body: Container(
         color: Colors.black,
@@ -58,11 +77,23 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   final username = _usernameController.text;
                   final password = _passwordController.text;
-                  Provider.of<AuthProvider>(context, listen: false).login(username, password);
+                  await Provider.of<AuthProvider>(context, listen: false).login(username, password);
+                  if(!context.mounted) return;
+                  final isLoggedIn = Provider.of<AuthProvider>(context, listen: false).authModel.isLoggedIn;
+                  if (isLoggedIn) {
+                    if (sourceIndex == 1) {
+                      exitscreentowalletPage();
+                    } else if (sourceIndex == 2) {
+                      exitscreentoprofilePage();
+                    }
+                  } else {
+                    showMessage();
+                  }
                 },
+                
                 child: const Text('Login'),
               ),
             ],

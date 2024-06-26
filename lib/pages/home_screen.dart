@@ -6,14 +6,15 @@ import 'wallet_page.dart';
 import 'profile_page.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget{
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
   State<HomeScreen> createState() {
-    return _HomeScreenState();
+    return HomeScreenState();
   }
 }
-class _HomeScreenState extends State<HomeScreen> {
+
+class HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -21,52 +22,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (index == 1) {
       if (!authProvider.authModel.isLoggedIn) {
-        _showLoginPopup();
+        _navigateToLogin(1);
       } else {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const WalletPage()));
       }
     } else if (index == 2) {
       if (!authProvider.authModel.isLoggedIn) {
-        _showLoginPopup();
+        _navigateToLogin(2);
       } else {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
       }
     } else {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const HomeScreen()));
+      setState(() {
+        _selectedIndex = index;
+      });
     }
-
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
-  void _showLoginPopup() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text(
-            'Login Required',
-            ),
-          content: const Text(
-            'You need to be logged in to access this page.'
-            ),
-          backgroundColor: Colors.black,
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => LoginPage(),
-                  ),
-                );
-              },
-              child: const Text('Login'),
-            ),
-          ],
-        );
-      },
+  void _navigateToLogin(int sourceIndex) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => LoginPage(sourceIndex: sourceIndex),
+      ),
     );
   }
 
@@ -122,14 +99,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-}
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => AuthProvider(),
-      child: const MaterialApp(
-        home: HomeScreen(),
-      ),
-    ),
-  );
 }

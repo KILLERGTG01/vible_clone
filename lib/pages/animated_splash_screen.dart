@@ -14,7 +14,14 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
   late AnimationController _vController;
   late Animation<double> _imageAnimation;
   late Animation<double> _vAnimation;
-
+  
+  void exitscreentohomePage(){
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
+    );
+  }
+  
   @override
   void initState() {
     super.initState();
@@ -48,10 +55,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
     // Simulate a network request or some async task
     await Future.delayed(const Duration(seconds: 5));
     // Navigate to the home screen
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
-    );
+    exitscreentohomePage();
   }
 
   @override
